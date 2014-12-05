@@ -10,6 +10,7 @@ $(document).ready(function(){
 
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
+
   	});
 
     $(".new").click(function() {
@@ -17,9 +18,7 @@ $(document).ready(function(){
 
     });
 
-});
-
-$(document).on("click", "#guessButton", function() {
+    $("#guessButton").click(function() {
       var userGuess = $("#userGuess").val();
       var result = hotOrCold(userGuess);
 
@@ -27,90 +26,87 @@ $(document).on("click", "#guessButton", function() {
 
         if (result === 0) {
           $("#feedback").html(userGuess + " is correct!");
-          console.log(secretNumber);
 
         } else if (result === 1) {
           $("#feedback").html("You're hot!");
-          console.log(secretNumber);
 
         } else if (result === 2) {
           $("#feedback").html("You're warm.");
-          console.log(secretNumber);
 
         } else {
           $("#feedback").html("You're cold. :(");
-          console.log(secretNumber);
 
         }
 
         totalGuesses += 1;
         $("#guessList").append("<li> " + userGuess + "</li>");
         $("#count").html(totalGuesses);
-        event.stopPropagation();
 
       } else {
         $("#feedback").closest("h2").html("Try again.");
-        event.stopPropagation();
+
       }
 
-});
+    });
 
-$(document).on('keydown', function(event) {
-    if (event.keyCode == 13) {
-      var userGuess = $("#userGuess").val();
-      var result = hotOrCold(userGuess);
+    $(document).on('keydown', function(event) {
 
-      if (checkInput(userGuess) === true) {
+      if (event.keyCode == 13) {
+        var userGuess = $("#userGuess").val();
+        var result = hotOrCold(userGuess);
 
-        if (result === 0) {
-          $("#feedback").html(userGuess + " is correct!");
-          console.log(secretNumber);
+        if (checkInput(userGuess) === true) {
 
-        } else if (result === 1) {
-          $("#feedback").html("You're hot!");
-          console.log(secretNumber);
+          if (result === 0) {
+            $("#feedback").html(userGuess + " is correct!");
 
-        } else if (result === 2) {
-          $("#feedback").html("You're warm.");
-          console.log(secretNumber);
+          } else if (result === 1) {
+            $("#feedback").html("You're hot!");
+            console.log("The secret number is " + secretNumber);
+            console.log("The user's guess is " + userGuess);
+
+          } else if (result === 2) {
+            $("#feedback").html("You're warm.");
+
+          } else {
+            $("#feedback").html("You're cold. :(");
+
+          }
+
+          totalGuesses += 1;
+          $("#guessList").append("<li> " + userGuess + "</li>");
+          $("#count").html(totalGuesses);
 
         } else {
-          $("#feedback").html("You're cold. :(");
-          console.log(secretNumber);
+          $("#feedback").closest("h2").html("Try again.");
 
         }
- 
-        totalGuesses += 1;
-        $("#guessList").append("<li> " + userGuess + "</li>");
-        $("#count").html(totalGuesses);
-        event.stopPropagation();
-
-      } else {
-        $("#feedback").closest("h2").html("Try again.");
-        event.stopPropagation();
 
       }
 
-  }
-      
+    });
+
 });
 
 function checkInput(value) {
 	if (value - Math.floor(value) != 0 || value < 0) {
 		return false;
+
 	} else {
 		return true;
+
 	}
 }
 
 function hotOrCold(value) {
   var number = Math.abs(value - secretNumber);
+  console.log("the number is", number);
 
   if (number = 0) {
-     return 0;
+    return 0;
 
   } else if (number <= 10) {
-     return 1;
+    return 1;
 
   } else if (number <= 30) {
     return 2;
@@ -126,5 +122,5 @@ function newGame() {
   //Set total guesses to 0
   //Reset feedback section to original text "Make Your Guess!"
   //secretNumber = Math.floor(Math.random() * 100) + 1;
-  console.log("You pressed new game!");
+  alert("You can't do that. Yet.");
 }
