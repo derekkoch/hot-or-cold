@@ -62,8 +62,8 @@ $(document).ready(function(){
 
           } else if (result === 1) {
             $("#feedback").html("You're hot!");
-            console.log("The secret number is " + secretNumber);
-            console.log("The user's guess is " + userGuess);
+            //console.log("The secret number is " + secretNumber);
+            //console.log("The user's guess is " + userGuess);
 
           } else if (result === 2) {
             $("#feedback").html("You're warm.");
@@ -89,7 +89,7 @@ $(document).ready(function(){
 });
 
 function checkInput(value) {
-	if (value - Math.floor(value) != 0 || value < 0) {
+	if (value - Math.floor(value) != 0 || value < 0 || value > 100) {
 		return false;
 
 	} else {
@@ -100,9 +100,9 @@ function checkInput(value) {
 
 function hotOrCold(value) {
   var number = Math.abs(value - secretNumber);
-  console.log("the number is", number);
+  //console.log("the number is", number);
 
-  if (number = 0) {
+  if (number === 0) {
     return 0;
 
   } else if (number <= 10) {
@@ -118,9 +118,10 @@ function hotOrCold(value) {
 }
 
 function newGame() {
-  //Clear guesses section
-  //Set total guesses to 0
-  //Reset feedback section to original text "Make Your Guess!"
-  //secretNumber = Math.floor(Math.random() * 100) + 1;
-  alert("You can't do that. Yet.");
+  totalGuesses = 0; 
+  secretNumber = Math.floor(Math.random() * 100) + 1;
+  $("#feedback").html("Make Your Guess!");
+  $("#guessList").html("");
+  $("#count").html(totalGuesses);
+  $("#userGuess").val("");
 }
