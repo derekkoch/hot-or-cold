@@ -249,6 +249,7 @@ input {
 
 input.button {
 	background: #1F253D;
+	text-align: center;
 	color: #95a5a6;
 	font-size: 2em;
 	padding: 0.2em;
